@@ -10,59 +10,65 @@ class TransactionList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     //Mapping data to widget using map()
-    return Column(
-      children: transactions.map((tx) {
-        return Card(
-          child: Row(
-            children: <Widget>[
-              Container(
-                //styling
-                margin: EdgeInsets.symmetric(
-                  vertical: 10,
-                  horizontal: 15,
-                ),
-                decoration: BoxDecoration(
-                  border: Border.all(
-                    color: Colors.purple,
-                    width: 2,
+    return Container(
+      height: 300,
+      //ListView - column + SingleChildScrollView
+      child: ListView.builder(
+        itemBuilder: (ctx, index) {
+          return Card(
+            child: Row(
+              children: <Widget>[
+                Container(
+                  //styling
+                  margin: EdgeInsets.symmetric(
+                    vertical: 10,
+                    horizontal: 15,
                   ),
-                ),
-                padding: EdgeInsets.all(10),
-                //double needs to be converted to string for Text
-                child: Text(
-                  //string interpolation
-                  '\u{20B9} ${tx.amount}',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20,
-                    color: Colors.purple,
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      color: Colors.purple,
+                      width: 2,
+                    ),
                   ),
-                ),
-              ),
-              Column(
-                //will make left alignment
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    tx.title,
+                  padding: EdgeInsets.all(10),
+                  //double needs to be converted to string for Text
+                  child: Text(
+                    //string interpolation
+                    '\u{20B9} ${transactions[index].amount}',
                     style: TextStyle(
-                      fontSize: 16,
                       fontWeight: FontWeight.bold,
+                      fontSize: 20,
+                      color: Colors.purple,
                     ),
                   ),
-                  Text(
-                    //Date Formatting from intl package
-                    DateFormat.yMMMd().format(tx.date),
-                    style: TextStyle(
-                      color: Colors.grey,
+                ),
+                Column(
+                  //will make left alignment
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      transactions[index].title,
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
-                  ),
-                ],
-              )
-            ],
-          ),
-        );
-      }).toList(),
+                    Text(
+                      //Date Formatting from intl package
+                      DateFormat.yMMMd().format(transactions[index].date),
+                      style: TextStyle(
+                        color: Colors.grey,
+                      ),
+                    ),
+                  ],
+                )
+              ],
+            ),
+          );
+        },
+        //run listview till the length of transactions
+        itemCount: transactions.length,
+      ),
     );
   }
 }
