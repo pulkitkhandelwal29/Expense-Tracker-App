@@ -33,8 +33,8 @@ class TransactionList extends StatelessWidget {
                   padding: EdgeInsets.all(10),
                   //double needs to be converted to string for Text
                   child: Text(
-                    //string interpolation
-                    '\u{20B9} ${transactions[index].amount}',
+                    //string interpolation with 2 decimal places for amount
+                    '\u{20B9} ${transactions[index].amount.toStringAsFixed(2)}',
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 20,
