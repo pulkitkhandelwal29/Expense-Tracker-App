@@ -1,12 +1,19 @@
 import 'package:flutter/material.dart';
 
-class NewTransaction extends StatelessWidget {
+//stateful widet as new transaction does not lose data in modal sheet
+class NewTransaction extends StatefulWidget {
   final Function addTx;
-  final titleController = TextEditingController();
-  final amountController = TextEditingController();
 
-  //Binding addTx to the function parameter
   NewTransaction(this.addTx);
+
+  @override
+  State<NewTransaction> createState() => _NewTransactionState();
+}
+
+class _NewTransactionState extends State<NewTransaction> {
+  final titleController = TextEditingController();
+
+  final amountController = TextEditingController();
 
   //add transaction button
   void submitData() {
@@ -18,10 +25,14 @@ class NewTransaction extends StatelessWidget {
       //return stops the later code not working
       return;
     }
-    addTx(
+    //because of this we can access properties of widget class from state class
+    widget.addTx(
       enteredTitle,
       enteredAmount,
     );
+
+    //close the focused screen i.e. modal sheet when its work is done
+    Navigator.of(context).pop();
   }
 
   @override
