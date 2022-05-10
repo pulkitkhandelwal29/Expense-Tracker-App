@@ -1,5 +1,6 @@
 import './transaction.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 void main() {
   runApp(MyApp());
@@ -67,7 +68,8 @@ class MyHomePage extends StatelessWidget {
                     padding: EdgeInsets.all(10),
                     //double needs to be converted to string for Text
                     child: Text(
-                      tx.amount.toString(),
+                      //string interpolation
+                      '\u{20B9} ${tx.amount}',
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 20,
@@ -87,7 +89,8 @@ class MyHomePage extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        tx.date.toString(),
+                        //Date Formatting from intl package
+                        DateFormat.yMMMd().format(tx.date),
                         style: TextStyle(
                           color: Colors.grey,
                         ),
