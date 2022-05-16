@@ -12,8 +12,11 @@ class ChartBar extends StatelessWidget {
     return Column(
       children: <Widget>[
         //it will shrinks the text also if there is a line wrap
-        FittedBox(
-          child: Text('\u{20B9}${spendingAmount.toStringAsFixed(0)}'),
+        Container(
+          height: 20,
+          child: FittedBox(
+            child: Text('\u{20B9}${spendingAmount.toStringAsFixed(0)}'),
+          ),
         ),
         SizedBox(
           height: 4,
