@@ -14,15 +14,18 @@ class NewTransaction extends StatefulWidget {
 class _NewTransactionState extends State<NewTransaction> {
   final _titleController = TextEditingController();
   final _amountController = TextEditingController();
-  DateTime _selectedDate = DateTime.now();
+  DateTime? _selectedDate;
 
   //add transaction button
   void submitData() {
+    if (_amountController.text.isEmpty) {
+      return;
+    }
     final enteredTitle = _titleController.text;
     //converts string number to text
     final enteredAmount = double.parse(_amountController.text);
 
-    if (enteredTitle.isEmpty || enteredAmount <= 0) {
+    if (enteredTitle.isEmpty || enteredAmount <= 0 || _selectedDate == null) {
       //return stops the later code not working
       return;
     }
@@ -30,6 +33,7 @@ class _NewTransactionState extends State<NewTransaction> {
     widget.addTx(
       enteredTitle,
       enteredAmount,
+      _selectedDate,
     );
 
     //close the focused screen i.e. modal sheet when its work is done
@@ -84,7 +88,7 @@ class _NewTransactionState extends State<NewTransaction> {
                     child: Text(
                       _selectedDate == null
                           ? 'No Date Chosen!'
-                          : 'Picked Date: ${DateFormat.yMMMd().format(_selectedDate)}',
+                          : 'Picked Date: ${DateFormat.yMMMd().format(_selectedDate!)}',
                     ),
                   ),
                   FlatButton(
