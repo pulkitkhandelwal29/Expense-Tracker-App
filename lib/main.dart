@@ -1,4 +1,5 @@
 import 'package:expense_tracker/widgets/chart.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/gestures.dart';
 
 import './widgets/new_transaction.dart';
@@ -9,6 +10,11 @@ import './widgets/chart.dart';
 import 'package:intl/intl.dart';
 
 void main() {
+  //Tells app to work only in Portrait mode
+  // SystemChrome.setPreferredOrientations([
+  //   DeviceOrientation.portraitUp,
+  //   DeviceOrientation.portraitDown,
+  // ]);
   runApp(MyApp());
 }
 
