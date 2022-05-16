@@ -1,5 +1,6 @@
 # Expense Tracker App
 <hr>
+
 ## Implementation
 Project is implemented in Flutter and Dart.
 
